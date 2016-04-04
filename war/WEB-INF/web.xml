@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>CloudEsiee</servlet-name>
+		<servlet-class>com.esiee.CloudEsieeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CloudEsiee</servlet-name>
+		<url-pattern>/cloudesiee</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Index</servlet-name>
+		<servlet-class>com.esiee.IndexServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Index</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<!-- URL -->
+	<servlet-mapping>
+		<servlet-name>TacheDeFond</servlet-name>
+		<url-pattern>/urlTacheDeFond</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Application -->
+	<servlet>
+		<servlet-name>TacheDeFond</servlet-name>
+		<servlet-class>com.esiee.TacheDeFondServlet</servlet-class>
+	</servlet>
+		
+		
+	<servlet>
+		<servlet-name>Requete</servlet-name>
+		<servlet-class>com.esiee.RequeteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Requete</servlet-name>
+		<url-pattern>/urlServletRequete</url-pattern>
+	</servlet-mapping>
+	
+	<filter>
+		<filter-name>MonFiltreMultiTnant</filter-name>
+		<filter-class>com.esiee.MonFiltre</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>MonFiltreMultiTnant</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+</web-app>
