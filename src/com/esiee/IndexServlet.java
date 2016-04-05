@@ -19,6 +19,12 @@ import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 
+import java.util.Collections;
+import javax.cache.Cache;
+import javax.cache.CacheException;
+import javax.cache.CacheFactory;
+import javax.cache.CacheManager;
+
 
 @SuppressWarnings("serial")
 public class IndexServlet extends HttpServlet {
@@ -50,6 +56,25 @@ public class IndexServlet extends HttpServlet {
 			// if not
 			resp.getWriter().println("<a href='" + userService.createLoginURL(req.getRequestURI()) + "'> Connexion </a>");
 		}
+		
+        Cache cache;
+        try {
+            CacheFactory cacheFactory = CacheManager.getInstance().getCacheFactory();
+            cache = cacheFactory.createCache(Collections.emptyMap());
+            String key = "data";
+            byte[] value = "CloudESIEE".getBytes();
+            
+            if (cache.get(key) == null) {
+                // Put the value into the cache.
+                cache.put(key, value);
+            }
+
+            // Get the value from the cache.
+            String message = new String((byte[]) cache.get(key));
+            resp.getWriter().println("Message en cache : " + message + "<br />");
+        } catch (CacheException e) {
+            // BLC
+        }
 		
 		// images
 		if (req.getParameter("blob-key") != null) {
